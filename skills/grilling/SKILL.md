@@ -1,6 +1,6 @@
 ---
 name: grilling
-description: Reach shared understanding before building, by asking only the questions that are answerable right now and answering the rest yourself. Use before any net-new build, architecture or technology choice, multi-file mutation, or work that will span sessions — and whenever the user says "grill me", "问我", "先别动手", "我们先对齐", or pushes back that a plan was written without knowing what it was for. Also use as the framing step of a plan-then-build pipeline, which needs a goal and an observable success definition but does not say how to elicit them. Do not use for a lookup, one reversible edit, or a task whose done-condition is already stated. Here the build is already decided; whether it should exist at all is `pressure-test`.
+description: Reach shared understanding before building, by asking only the questions that are answerable right now and answering the rest yourself. Use before any net-new build, architecture or technology choice, multi-file mutation, or work that will span sessions — and whenever the user says "grill me" or pushes back that a plan was written without knowing what it was for. Also use as the framing step of a plan-then-build pipeline, which needs a goal and an observable success definition but does not say how to elicit them. Do not use for a lookup, one reversible edit, or a task whose done-condition is already stated. Here the build is already decided; whether it should exist at all is `pressure-test`.
 ---
 
 # Grilling

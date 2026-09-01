@@ -36,6 +36,24 @@ survived a real task does not belong in a published collection. Then add its fol
    that resolves to nothing is worse than a sentence describing the handoff in plain English.
 3. It decides where it writes rather than assuming a layout — see the portability note in the README.
 
+The sync enforces the first of those and two things it cannot leave to a reader:
+
+- **The frontmatter must actually parse as YAML.** A bare `: ` inside an unquoted value makes the
+  loader throw *"mapping values are not allowed in this context"* and the skill silently fails to
+  load. This shipped once: the pre-push check grepped that `name:` and `description:` were *present*
+  and called that a frontmatter check. Presence is not validity. Reword the sentence or quote the
+  whole value.
+- **No UTF-8 BOM.** Three bytes in front of the opening `---` and the frontmatter stops parsing. The
+  sync writes files with an explicit BOM-less encoding rather than `Set-Content -Encoding UTF8`,
+  which adds a BOM in PowerShell 5.1 and not in pwsh 7 — a bug that would appear only on one of the
+  two consoles.
+
+**Descriptions are transformed on the way out.** The originals carry Chinese trigger phrases
+alongside the English ones, because the author triggers these skills in both languages. The sync
+strips them from the published copy: the description is always-loaded routing text, and in a public
+repo those phrases cost every other reader attention for no benefit. Edit the English triggers in the
+original; do not add them here.
+
 Skills stay **flat** at `skills/<name>/`. Bucketing into category folders forces every path to be
 hand-enumerated in `plugin.json`; flat needs no enumeration at all.
 

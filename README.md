@@ -30,13 +30,9 @@ Most planning skills stop at shared understanding. These do two things such skil
 Or drop any single skill folder from `skills/` into `.claude/skills/` in your project, or into
 `~/.claude/skills/` for every project.
 
-Two things worth knowing before you install:
-
-- **`grilling` is a common name.** Installed as a plugin it is namespaced, so it cannot clash with a
-  same-named skill from another collection. Copied by hand into `.claude/skills/`, it can — rename the
-  folder if you already have one.
-- **Triggers are bilingual.** The descriptions carry Chinese trigger phrases alongside the English
-  ones on purpose, so the skills fire in either language. They are not leftovers.
+One thing worth knowing: **`grilling` is a common name.** Installed as a plugin it is namespaced, so
+it cannot clash with a same-named skill from another collection. Copied by hand into
+`.claude/skills/`, it can — rename the folder if you already have one.
 
 ## The three skills
 
