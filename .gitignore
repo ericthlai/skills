@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+node_modules/
+*.log
+
+# Local build tooling. It points at an absolute path on the author's machine and
+# names private directories, so it stays out of the published repo.
+sync-from-workspace.ps1

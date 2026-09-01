@@ -1,0 +1,19 @@
+{
+  "name": "hanlin-skills",
+  "version": "0.1.0",
+  "description": "Decide before you build. Three interlocking skills: pressure-test an idea against what already exists, grill out the hidden decisions, and scout one named option to a sourced verdict.",
+  "author": {
+    "name": "Hanlin Tian"
+  },
+  "homepage": "https://github.com/ericthlai/skills",
+  "repository": "https://github.com/ericthlai/skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "decision-making",
+    "prior-art",
+    "research",
+    "planning",
+    "grilling"
+  ]
+}

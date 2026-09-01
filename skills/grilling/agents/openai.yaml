@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grilling"
+  short_description: "Ask only the answerable questions, and answer the rest yourself"
+  default_prompt: "Use $grilling to reach shared understanding before building this."

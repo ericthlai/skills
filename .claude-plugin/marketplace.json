@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "hanlin",
+  "description": "Hanlin Tian's agent skills.",
+  "owner": {
+    "name": "Hanlin Tian",
+    "url": "https://github.com/ericthlai"
+  },
+  "plugins": [
+    {
+      "name": "hanlin-skills",
+      "source": "./",
+      "description": "Decide before you build: pressure-test, grilling, scout.",
+      "homepage": "https://github.com/ericthlai/skills",
+      "license": "MIT",
+      "category": "planning",
+      "keywords": [
+        "decision-making",
+        "prior-art",
+        "research",
+        "planning"
+      ]
+    }
+  ]
+}

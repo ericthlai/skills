@@ -1,0 +1,4 @@
+interface:
+  display_name: "Pressure Test"
+  short_description: "Grill an idea, search for what exists, write the call down"
+  default_prompt: "Use $pressure-test to decide whether this idea is worth building at all."
