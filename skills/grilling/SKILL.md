@@ -22,7 +22,7 @@ Asking *"which database does this use?"* when `package.json` answers it turns th
 engine and spends the scarcest resource in the session — their attention — on the cheapest possible
 work.
 
-**A decision is his.** A trade-off, a preference, a risk ranking, what users should experience,
+**A decision is the user's.** A trade-off, a preference, a risk ranking, what users should experience,
 whether a cost is acceptable, which requirement actually matters.
 
 Before every question, ask: *could I find this out?* If yes, go find it. Run the fact-gathering in
@@ -95,17 +95,20 @@ later. (Until 2026-08-27 this sentence pointed at a directory that did not exist
 failure one level up: verify a home is real before aiming a rule at it. And the file `pressure-test`
 writes is not that home — it holds why an idea was pursued at all, not what this skill settles.)
 
+Follow the host's write authority. If neither the user nor repository policy authorizes persistence,
+return the durable-decision candidate in the conversation instead of editing files.
+
 ## 7. When the frontier outlives the session
 
 Sections 1–6 assume one conversation: compute the frontier, empty it, done. A build spanning
 sessions breaks that — the frontier is still populated when the context runs out, and nothing here
 holds it. `STATE.md` carries one `next action`, not a graph of open questions.
 
-So write the tree beside the work, in a dated working file next to it. If the project keeps a
-cross-session state file — a `STATE.md`, or whatever this repository calls it — point at the working
-file from there, because that is what the next session reads first. If there is none, say plainly in
-your closing message where the working file is, and move on: its absence is not a problem to solve
-from inside this skill.
+When persistence is authorized, write the tree beside the work in a dated working file. If the
+project keeps a cross-session state file — a `STATE.md`, or whatever this repository calls it — point
+at the working file from there, because that is what the next session reads first. If persistence is
+not authorized, return the same four-section handoff in the conversation. The absence of a state file
+is not a problem to solve from inside this skill.
 
 Four headings:
 
