@@ -7,6 +7,33 @@ verdict you can act on.
 They are written for [Claude Code](https://claude.com/claude-code) and work in any harness that
 reads the Agent Skills format.
 
+## Example
+
+*Example output from `/pressure-test` on a sample idea (generated with the skill, lightly trimmed):*
+
+> **Idea:** Chrome extension that scores every job posting against my resume
+>
+> **Call: ADOPT** — free, actively maintained extensions already do this.
+>
+> **Why:** the ask has no functional gap. Several tools already read the job
+> page you're on and return a resume match score plus what's missing — the
+> whole idea. "5 lines, no dashboard" is a display preference, not a missing
+> capability.
+>
+> **What the search found:**
+> - Jobalytics — free, match score + missing keywords, any job listing.
+> - JobMatchAI — open source (license unconfirmed, check before forking).
+> - Resumly, Match Resume, ResumeVera — same core loop, freemium.
+>
+> **Smallest sufficient version:** install Jobalytics, use it two weeks.
+> Only write code if a specific gap survives real use.
+>
+> **Parked:** fork JobMatchAI into a 5-line format if the stock UI is too
+> slow to scan after real use.
+>
+> **Out of scope:** a full application-tracking pipeline — Standout and
+> Teal already own that.
+
 ## Why these three
 
 Most planning skills stop at shared understanding. These do two things such skills usually skip:
@@ -66,6 +93,11 @@ These skills write files, so they have to decide where. On first use in a reposi
 location — preferring whatever convention the repository already has, then a relative default they
 create — and record the answer in your `CLAUDE.md` or `AGENTS.md` so no later session asks again.
 Nothing assumes a directory exists.
+
+## How this was built
+- **I decided:** the three-skill split and when each fires, the verdict vocabulary (ADOPT / BUILD / NOT NOW / KILL), the one-batch-of-questions-with-a-recommendation rule, and what is borrowed from `mattpocock/skills` versus original (see Attribution).
+- **The agent generated:** a large share of the skill prose from that design. 3 of 4 commits carry a Claude co-author trailer.
+- **I verified:** by running the skills. The example above was produced by running `pressure-test` on a sample idea and lightly trimmed. There are no automated tests; these are prompts, not runtime code.
 
 ## Attribution
 
