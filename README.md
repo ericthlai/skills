@@ -64,8 +64,10 @@ it cannot clash with a same-named skill from another collection. Copied by hand 
 | **`grilling`** | The build is decided; what to build is not. Before any net-new build, architecture choice, or multi-file change | Shared understanding, plus an authorized cross-session handoff when needed |
 | **`scout`** | One named tool, repo, vendor, or product needs researching to a recommendation | A sourced packet: recommendation first, then evidence, contrary evidence, and what would change the call |
 
-They chain: `pressure-test` decides whether to proceed and hands to `grilling`; `grilling` hands one
-named candidate to `scout` and uses what comes back. Each also works alone.
+They chain: `pressure-test` decides whether to proceed and hands to `grilling`. When one named
+candidate needs a serious look, `pressure-test` hands it to `scout` and uses what comes back;
+`scout` hands back to `pressure-test` if its research shows the idea itself is still open. Each
+also works alone.
 
 ## What makes them behave differently
 
