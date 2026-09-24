@@ -9,8 +9,9 @@ survive** — the next sync regenerates this whole `skills/` tree from those ori
 anything changed in place.
 
 The sync tooling itself is deliberately not published: it holds an absolute path on one machine and
-names private directories, so it is gitignored. It refuses to complete if any host-specific string
-reappears in the output, which is why a leak cannot ship quietly.
+names private directories, so it is gitignored. It checks for known host-specific strings before
+syncing. The public validator provides a second, reproducible check of the generated output; neither
+mechanism is a guarantee that arbitrary confidential content can never be committed.
 
 If you are reading this as an outside contributor: open an issue or a PR against the skill text and
 it will be applied upstream, then synced back. Sorry for the indirection; a single source beats two
@@ -64,10 +65,10 @@ first bump.
 **What does not go in here**
 
 - Personal, client, or company names. Anything host-specific. Any absolute path from a private
-  machine. The sync refuses to complete if one reappears, and it scans the whole repository, not just
-  `skills/` — an earlier version checked only `skills/` and a private path shipped in a root file.
+  machine. The sync and public validator scan the whole repository, not just `skills/`, for the known
+  patterns they can detect.
 - A parallel `docs/` tree mirroring every skill. At this size the README sections do that job:
   `skills/` is what the agent reads, this file and the README are what a human evaluating the repo
   reads.
-- Release automation, eval harnesses, or per-platform manifests for other agents, until there is a
-  change cadence that needs them.
+- Release automation, model-coupled eval runners, or per-platform manifests for other agents, until
+  there is a change cadence that needs them. The small routing corpus is intentionally unscored.

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "unscored",
+  "cases": [
+    {
+      "id": "pressure-test-build-or-buy",
+      "prompt": "Should we build our own internal meeting-summary app, or does something already solve this?",
+      "expected_skill": "pressure-test",
+      "reason": "The idea itself and the build-versus-adopt decision are still open."
+    },
+    {
+      "id": "pressure-test-kill-or-keep",
+      "prompt": "Talk me out of this dashboard idea before I spend a week on it.",
+      "expected_skill": "pressure-test",
+      "reason": "The user wants a go-or-no-go call before committing to a build."
+    },
+    {
+      "id": "grilling-decided-build",
+      "prompt": "We have decided to build the intake portal. Help me expose the unresolved product decisions before implementation.",
+      "expected_skill": "grilling",
+      "reason": "The build is approved; its requirements and boundaries are not."
+    },
+    {
+      "id": "grilling-multisession-scope",
+      "prompt": "Before touching these files, make sure we agree on the goal, non-goals, and done condition for this multi-session migration.",
+      "expected_skill": "grilling",
+      "reason": "The request is to reach shared understanding for an already chosen effort."
+    },
+    {
+      "id": "scout-named-repository",
+      "prompt": "Evaluate the LangGraph repository for our workflow and recommend adopt, adapt, or reject.",
+      "expected_skill": "scout",
+      "reason": "A named option needs evidence-backed diligence."
+    },
+    {
+      "id": "scout-named-vendor",
+      "prompt": "Research Acme AI before our vendor meeting and tell me what would change your recommendation.",
+      "expected_skill": "scout",
+      "reason": "A named vendor needs a sourced decision brief."
+    },
+    {
+      "id": "overlap-build-own-versus-named-tool",
+      "prompt": "Should we build our own evaluator or adopt Promptfoo?",
+      "expected_skill": "pressure-test",
+      "reason": "Although a candidate is named, the governing decision is whether to build at all."
+    },
+    {
+      "id": "negative-simple-edit",
+      "prompt": "Fix the typo in README.md.",
+      "expected_skill": null,
+      "reason": "A reversible single-file edit does not need decision framing or research."
+    },
+    {
+      "id": "negative-explanation",
+      "prompt": "Explain what this Python function does.",
+      "expected_skill": null,
+      "reason": "A local explanation is not a build decision, design-framing task, or named-option study."
+    }
+  ]
+}

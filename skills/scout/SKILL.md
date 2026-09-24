@@ -1,6 +1,6 @@
 ---
 name: scout
-description: Research a named tool, repository, vendor, company, article, product, or other concrete option and turn evidence into an adopt, adapt, buy, build, replace, pilot, or go-no-go recommendation. Use for "look into X," sourced comparisons, due diligence, and decision preparation. Do not use for open-ended brainstorming without a named decision; that is strategy-sparring.
+description: Research a named tool, repository, vendor, company, article, product, or other concrete option and turn evidence into an adopt, adapt, buy, build, replace, pilot, or go-no-go recommendation. Use for "look into X," sourced comparisons, due diligence, and decision preparation. Do not use for open-ended brainstorming without a named decision.
 ---
 
 # Scout
@@ -26,7 +26,7 @@ Do not ask the user to choose a mode. Infer the smallest sufficient depth.
 
 ## Run the decision loop
 
-1. **Check first — it may already be decided.** Read this skill's own prior-run register for this object before anything else; a settled verdict with no new evidence is the answer, and scout only what is still unknown. The register lives beside the packets — `scout/index.md` under whatever directory this repository files them in, created on first use rather than assumed. Also read whatever the repository keeps on vendors, tools, or prior adoptions if it keeps such a thing; where it does, a decision already recorded there outranks anything you are about to find.
+1. **Check first — it may already be decided.** If an authorized prior-run register exists, read it before anything else; a settled verdict with no new evidence is the answer, and scout only what is still unknown. When the host authorizes packet storage, the register lives beside the packets — `scout/index.md` under whatever directory the repository designates. Do not create it without write authority. Also read whatever the repository keeps on vendors, tools, or prior adoptions if it keeps such a thing; where it does, a decision already recorded there outranks anything you are about to find.
 2. Define the object, decision, success criterion, and material unknowns.
 3. Mine supplied or connected material before widening the search.
 4. Prefer first-party documentation, repositories, filings, standards, and direct product evidence. Add independent critics, users, alternatives, and contrary evidence when material.

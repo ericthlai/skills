@@ -2,6 +2,9 @@
 Thumbs.db
 node_modules/
 *.log
+__pycache__/
+*.py[cod]
+.venv/
 
 # Local build tooling. It points at an absolute path on the author's machine and
 # names private directories, so it stays out of the published repo.
