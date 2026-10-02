@@ -46,7 +46,7 @@ Most planning skills stop at shared understanding. These do two things such skil
 ```
 
 ```
-/plugin install hanlin-skills@hanlin
+/plugin install ericthlai-skills@ericthlai
 ```
 
 Or drop any single skill folder from `skills/` into `.claude/skills/` in your project, or into
