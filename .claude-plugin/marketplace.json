@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "hanlin",
-  "description": "Hanlin Tian's agent skills.",
+  "name": "ericthlai",
+  "description": "Agent skills for research and decisions.",
   "owner": {
-    "name": "Hanlin Tian",
+    "name": "ericthlai",
     "url": "https://github.com/ericthlai"
   },
   "plugins": [
     {
-      "name": "hanlin-skills",
+      "name": "ericthlai-skills",
       "source": "./",
       "description": "Decide before you build: pressure-test, grilling, scout.",
       "homepage": "https://github.com/ericthlai/skills",
