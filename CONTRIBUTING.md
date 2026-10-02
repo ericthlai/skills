@@ -3,16 +3,12 @@
 Issues and pull requests are welcome. Please describe the behavior being changed, why the current
 instruction fails, and the smallest realistic case that demonstrates the difference.
 
-## Generated skill files
+## Where changes go
 
-The `skills/` tree is generated from canonical sources maintained outside this distribution
-repository. A pull request may propose changes directly against a published `SKILL.md`, but it must
-be marked **UPSTREAM APPLICATION REQUIRED**. A maintainer applies the change to the canonical source,
-re-syncs the generated tree, and only then merges it. Merging an isolated generated-file edit would
-allow the next sync to overwrite the contribution.
-
-Root documentation, tests, CI configuration, and evaluation fixtures are maintained directly in
-this repository.
+This repository is the source of truth. Skills, root documentation, tests, CI configuration, and
+evaluation fixtures are all edited here: change `skills/<name>/SKILL.md` (or a file it bundles)
+directly and open a pull request. There is no separate upstream copy and no sync step. Conventions
+for new and changed skills are in [`CLAUDE.md`](CLAUDE.md).
 
 ## Validate a change
 
