@@ -93,7 +93,7 @@ record is authorized, an existing project convention wins over creating another 
 ## Validation
 
 CI validates every skill against the Agent Skills specification and checks repository-specific
-invariants such as manifest syntax, local references, line endings, and generated-output markers.
+invariants such as manifest syntax, local references, line endings, and host-specific absolute paths.
 The routing cases in [`evals/routing-cases.json`](evals/routing-cases.json) document intended skill
 boundaries; they are an unscored corpus, not a claim of model-level accuracy.
 

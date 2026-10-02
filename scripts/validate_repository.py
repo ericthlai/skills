@@ -127,15 +127,6 @@ def validate_manifests(errors: list[str]) -> None:
             fail(errors, f"routing case {case_id}: unknown expected skill")
 
 
-def validate_generated_contract(errors: list[str]) -> None:
-    agent_rules = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
-    contributing = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
-    if "build output" not in agent_rules:
-        fail(errors, "CLAUDE.md must identify the published skill tree as build output")
-    if "UPSTREAM APPLICATION REQUIRED" not in contributing:
-        fail(errors, "CONTRIBUTING.md must preserve the upstream-application marker")
-
-
 def main() -> int:
     errors: list[str] = []
     files = repository_files()
@@ -143,7 +134,6 @@ def main() -> int:
     validate_links(errors, files)
     validate_skills(errors)
     validate_manifests(errors)
-    validate_generated_contract(errors)
     agents = ROOT / "AGENTS.md"
     if not agents.is_symlink() or agents.readlink() != Path("CLAUDE.md"):
         fail(errors, "AGENTS.md must be a symlink to CLAUDE.md")

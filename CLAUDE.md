@@ -2,20 +2,11 @@
 
 Rules for editing this repository, not instructions for the skills themselves.
 
-## The skills here are a build output
+## This repository is the source of truth
 
-The originals live in the author's private workspace. **Never edit a `SKILL.md` here and expect it to
-survive** — the next sync regenerates this whole `skills/` tree from those originals and overwrites
-anything changed in place.
-
-The sync tooling itself is deliberately not published: it holds an absolute path on one machine and
-names private directories, so it is gitignored. It checks for known host-specific strings before
-syncing. The public validator provides a second, reproducible check of the generated output; neither
-mechanism is a guarantee that arbitrary confidential content can never be committed.
-
-If you are reading this as an outside contributor: open an issue or a PR against the skill text and
-it will be applied upstream, then synced back. Sorry for the indirection; a single source beats two
-copies that drift.
+The skills are edited here, directly. Change `skills/<name>/SKILL.md` (or a file it bundles) and
+open a pull request. There is no separate upstream copy and no sync step: what is merged to `main`
+is the published version. Outside contributors follow the same path; see `CONTRIBUTING.md`.
 
 ## `AGENTS.md` is a symlink to this file
 
@@ -24,12 +15,12 @@ rules drift, and nothing warns you when they do.
 
 ## Maintenance
 
-**Changing an existing skill.** Edit the original in the private workspace, run the sync, commit,
-push. Never the copy here.
+**Changing an existing skill.** Edit `skills/<name>/SKILL.md` in place, run the validation commands
+in `CONTRIBUTING.md`, and open a pull request.
 
-**Adding a skill.** Write and actually use it in the private workspace first — a skill that has not
-survived a real task does not belong in a published collection. Then add its folder name to the
-`$Skills` list in the sync script, sync, and check three things before pushing:
+**Adding a skill.** Write and actually use it on a real task first — a skill that has not survived
+one does not belong in a published collection. Then add its folder under `skills/` and check three
+things before opening the pull request:
 
 1. Its `name:` frontmatter matches its directory name exactly, and it has a `description:`. Both are
    required by the `skills` CLI even though Claude Code is laxer.
@@ -37,23 +28,20 @@ survived a real task does not belong in a published collection. Then add its fol
    that resolves to nothing is worse than a sentence describing the handoff in plain English.
 3. It decides where it writes rather than assuming a layout — see the portability note in the README.
 
-The sync enforces the first of those and two things it cannot leave to a reader:
+CI enforces the first of those, and two further things a reader is likely to miss:
 
 - **The frontmatter must actually parse as YAML.** A bare `: ` inside an unquoted value makes the
   loader throw *"mapping values are not allowed in this context"* and the skill silently fails to
-  load. This shipped once: the pre-push check grepped that `name:` and `description:` were *present*
-  and called that a frontmatter check. Presence is not validity. Reword the sentence or quote the
-  whole value.
-- **No UTF-8 BOM.** Three bytes in front of the opening `---` and the frontmatter stops parsing. The
-  sync writes files with an explicit BOM-less encoding rather than `Set-Content -Encoding UTF8`,
-  which adds a BOM in PowerShell 5.1 and not in pwsh 7 — a bug that would appear only on one of the
-  two consoles.
+  load. Checking that `name:` and `description:` are *present* does not catch it; presence is not
+  validity. `agentskills validate` parses the frontmatter and fails on it. Reword the sentence or
+  quote the whole value.
+- **No UTF-8 BOM.** Three bytes in front of the opening `---` and the frontmatter stops parsing.
+  `scripts/validate_repository.py` rejects them. Save files as UTF-8 without a BOM:
+  `Set-Content -Encoding UTF8` adds one in Windows PowerShell 5.1 but not in PowerShell 7, a bug
+  that would appear only on one of the two consoles.
 
-**Descriptions are transformed on the way out.** The originals carry Chinese trigger phrases
-alongside the English ones, because the author triggers these skills in both languages. The sync
-strips them from the published copy: the description is always-loaded routing text, and in a public
-repo those phrases cost every other reader attention for no benefit. Edit the English triggers in the
-original; do not add them here.
+**Descriptions are routing text.** A skill's `description:` is always loaded into the agent's
+context, so keep it in English and tight; every extra trigger phrase costs every reader attention.
 
 Skills stay **flat** at `skills/<name>/`. Bucketing into category folders forces every path to be
 hand-enumerated in `plugin.json`; flat needs no enumeration at all.
@@ -65,8 +53,9 @@ first bump.
 **What does not go in here**
 
 - Personal, client, or company names. Anything host-specific. Any absolute path from a private
-  machine. The sync and public validator scan the whole repository, not just `skills/`, for the known
-  patterns they can detect.
+  machine. The public validator scans the whole repository, not just `skills/`, for the known
+  patterns it can detect. It is not a guarantee that other confidential content can never be
+  committed, so review the diff before pushing.
 - A parallel `docs/` tree mirroring every skill. At this size the README sections do that job:
   `skills/` is what the agent reads, this file and the README are what a human evaluating the repo
   reads.
