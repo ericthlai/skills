@@ -35,6 +35,31 @@ def repository_files() -> list[Path]:
     return sorted({ROOT / item.decode() for item in result.stdout.split(b"\0") if item})
 
 
+def committed_symlink_target(path: Path) -> str | None:
+    """Return the symlink target recorded in the git index for path, or None.
+
+    This reads the git index rather than the working tree: Git for Windows
+    checks symlinks out as plain files unless core.symlinks is enabled, so a
+    filesystem check fails on a clean Windows clone of a correct commit.
+    """
+    entry = subprocess.run(
+        ["git", "ls-files", "-s", "--", path.relative_to(ROOT).as_posix()],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.split()
+    if len(entry) < 4 or entry[0] != "120000":
+        return None
+    blob = subprocess.run(
+        ["git", "cat-file", "blob", entry[1]],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout
+    return blob.decode("utf-8", errors="replace")
+
+
 def validate_text_files(errors: list[str], files: list[Path]) -> None:
     for path in files:
         if path.is_symlink():
@@ -127,34 +152,6 @@ def validate_manifests(errors: list[str]) -> None:
             fail(errors, f"routing case {case_id}: unknown expected skill")
 
 
-def validate_agents_symlink(errors: list[str]) -> None:
-    """Require AGENTS.md to be committed as a symlink to CLAUDE.md.
-
-    This reads the git index rather than the working tree: Git for Windows
-    checks symlinks out as plain files unless core.symlinks is enabled, so a
-    filesystem check fails on a clean Windows clone of a correct commit.
-    """
-    message = "AGENTS.md must be a symlink to CLAUDE.md"
-    entry = subprocess.run(
-        ["git", "ls-files", "-s", "--", "AGENTS.md"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.split()
-    if len(entry) < 4 or entry[0] != "120000":
-        fail(errors, message)
-        return
-    target = subprocess.run(
-        ["git", "cat-file", "blob", entry[1]],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-    ).stdout
-    if target != b"CLAUDE.md":
-        fail(errors, message)
-
-
 def validate_generated_contract(errors: list[str]) -> None:
     agent_rules = (ROOT / "CLAUDE.md").read_text(encoding="utf-8")
     contributing = (ROOT / "CONTRIBUTING.md").read_text(encoding="utf-8")
@@ -172,7 +169,9 @@ def main() -> int:
     validate_skills(errors)
     validate_manifests(errors)
     validate_generated_contract(errors)
-    validate_agents_symlink(errors)
+    agents = ROOT / "AGENTS.md"
+    if committed_symlink_target(agents) != "CLAUDE.md":
+        fail(errors, "AGENTS.md must be a symlink to CLAUDE.md")
     if errors:
         print("Repository validation failed:", file=sys.stderr)
         for error in errors:
